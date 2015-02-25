@@ -1,0 +1,32 @@
+{
+  "name": "node-ec2ssh",
+  "version": "0.1.0",
+  "description": "SSH into EC2 instances via tags",
+  "main": "index.js",
+  "dependencies": {
+    "ascii-table": "^0.0.8",
+    "aws-sdk": "^2.1.14",
+    "commander": "^2.6.0",
+    "inquirer": "^0.8.0"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dominiklessel/node-ec2ssh"
+  },
+  "keywords": [
+    "ssh",
+    "ec2",
+    "tags"
+  ],
+  "author": "Dominik Lessel <dominik@mifitto.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dominiklessel/node-ec2ssh/issues"
+  },
+  "homepage": "https://github.com/dominiklessel/node-ec2ssh",
+  "bin": {
+    "ec2hosts" : "./bin/ec2hosts",
+    "ec2ssh" : "./bin/ec2ssh"
+  }
+}

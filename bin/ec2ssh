@@ -1,0 +1,54 @@
+#!/usr/bin/env node
+
+'use strict';
+
+/**
+ * Load modules
+ */
+
+var path = require('path');
+
+var program = require('commander');
+
+var ec2 = require('../lib/ec2');
+var utils = require('../lib/utils');
+
+/**
+ * Config
+ */
+
+program
+  .version( '1.0.0' )
+  .usage('[options] <nameFilter1, nameFilter2, ...>')
+  .option('-k, --aws-key [key]', 'Amazon Access Key. Defaults to ~/.aws/credentials -> aws_access_key_id or ENV.AWS_ACCESS_KEY_ID')
+  .option('-s, --aws-secret [secret]', 'Amazon Secret Access Key. Defaults to ~/.aws/credentials -> aws_secret_access_key or ENV.AWS_SECRET_ACCESS_KEY')
+  .option('-r, --region [region]', 'Amazon EC2 Region. Defaults to `eu-west-1` or ENV.AWS_EC2_REGION')
+  .option('-t, --tag [tag]', 'Tag name for searching. Defaults to `Name`')
+  .option('-u, --user [user]', 'User used for ssh connection. Defaults to `ubuntu`')
+  .parse( process.argv );
+
+var nameFilters = program.args;
+
+var sshOptions = {
+  user: 'ubuntu',
+  identityFilesPath:  path.join( process.env.HOME, '.ssh/keys' )
+};
+
+/**
+ * Kick off
+ */
+
+ec2.describeInstances(nameFilters, function( err, instances ) {
+
+  if ( !!err ) {
+    console.log( '[ec2ssh] - error:' );
+    return console.log( err );
+  }
+
+  utils.selectInstance(instances, function( instance ) {
+
+    utils.sshIntoInstance( instance, sshOptions );
+
+  });
+
+});
