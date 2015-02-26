@@ -45,6 +45,11 @@ ec2.describeInstances(nameFilters, function( err, instances ) {
     return console.log( err );
   }
 
+  if ( instances.length === 1 ) {
+    console.log( '[ec2ssh] - Connectin to %s ...', instances[0].name );
+    return utils.sshIntoInstance( instances[0], sshOptions );
+  }
+
   utils.selectInstance(instances, function( instance ) {
 
     utils.sshIntoInstance( instance, sshOptions );
