@@ -1,6 +1,6 @@
 {
   "name": "ec2ssh",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "SSH into EC2 instances via tags",
   "main": "index.js",
   "dependencies": {
@@ -26,7 +26,7 @@
   },
   "homepage": "https://github.com/dominiklessel/node-ec2ssh",
   "bin": {
-    "ec2hosts" : "./bin/ec2hosts",
-    "ec2ssh" : "./bin/ec2ssh"
+    "ec2hosts": "./bin/ec2hosts",
+    "ec2ssh": "./bin/ec2ssh"
   }
 }
