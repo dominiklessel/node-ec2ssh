@@ -14,11 +14,59 @@ $ npm install -g ec2ssh
 
 The module uses the AWS JavaScript SDK internally, so please take a look at: http://docs.aws.amazon.com/AWSJavaScriptSDK/guide/node-configuring.html
 
-## Usage
+By default, ec2ssh will automatically use the shared credentials file (`~/.aws/credentials`) for configuration when loading.
 
-### ec2hosts - Lists instances
+### Example
 
 ```
+[default]
+output = json
+region = eu-west-1
+aws_access_key_id = your_aws_access_key_id
+aws_secret_access_key = your_aws_secret_access_key
+```
+
+## Usage
+
+### ec2hosts
+
+#### List all instances in your default region
+```
+$ ec2hosts
+.--------------------------------------------------------------------------------------.
+|              Name               |                        DNS                         |
+|---------------------------------|----------------------------------------------------|
+| foo-instance                    | ec2-xx-xx-xx-xxx.eu-west-1.compute.amazonaws.com   |
+| bar-instance                    | ec2-xx-xx-xx-xxx.eu-west-1.compute.amazonaws.com   |
+| baz-instance                    | ec2-xx-xx-xx-xxx.eu-west-1.compute.amazonaws.com   |
+'--------------------------------------------------------------------------------------'
+```
+
+#### List all istances, which name contains `foo` 
+```
+$ ec2hosts foo
+.--------------------------------------------------------------------------------------.
+|              Name               |                        DNS                         |
+|---------------------------------|----------------------------------------------------|
+| foo-instance                    | ec2-xx-xx-xx-xxx.eu-west-1.compute.amazonaws.com   |
+'--------------------------------------------------------------------------------------'
+```
+
+#### List all istances, which name contains `bar` or `baz` 
+```
+$ ec2hosts bar baz
+.--------------------------------------------------------------------------------------.
+|              Name               |                        DNS                         |
+|---------------------------------|----------------------------------------------------|
+| bar-instance                    | ec2-xx-xx-xx-xxx.eu-west-1.compute.amazonaws.com   |
+| baz-instance                    | ec2-xx-xx-xx-xxx.eu-west-1.compute.amazonaws.com   |
+'--------------------------------------------------------------------------------------'
+```
+
+#### Help
+```
+$ ec2hosts -h
+
   Usage: ec2hosts [options] <nameFilter1, nameFilter2, ...>
 
   Options:
@@ -31,9 +79,76 @@ The module uses the AWS JavaScript SDK internally, so please take a look at: htt
     -t, --tag [tag]            Tag name for searching. Defaults to `Name`
 ```
 
-### ec2ssh - Connects to instance
+### ec2ssh
+
+
+#### Choose an instance and connect to it
+```
+$ ec2ssh ba
+
+? Please select an instance to connect to: (Use arrow keys)
+❯ bar-instance
+  baz-instance
+
+[Enter]
+
+Welcome to Ubuntu 12.04.5 LTS (GNU/Linux 3.2.0-76-virtual x86_64)
+
+  System information as of Thu Feb 26 09:47:32 UTC 2015
+
+  System load:  0.0               Processes:           64
+  Usage of /:   29.7% of 7.87GB   Users logged in:     0
+  Memory usage: 8%                IP address for eth0: 10.82.154.32
+  Swap usage:   0%
+
+0 packages can be updated.
+0 updates are security updates.
+
+ubuntu@0bar.instance.com: ~
+→ ls
+tmp  foo
+
+→ exit
+logout
+Connection to ec2-xx-xx-xx-xxx.eu-west-1.compute.amazonaws.com closed.
+
+[ec2ssh] - SSH connection closed!
+```
+
+#### Connect to an instance (exact name match)
+```
+$ ec2ssh bar-instance
+
+Welcome to Ubuntu 12.04.5 LTS (GNU/Linux 3.2.0-76-virtual x86_64)
+
+  System information as of Thu Feb 26 09:47:32 UTC 2015
+
+  System load:  0.0               Processes:           64
+  Usage of /:   29.7% of 7.87GB   Users logged in:     0
+  Memory usage: 8%                IP address for eth0: 10.82.154.32
+  Swap usage:   0%
+
+0 packages can be updated.
+0 updates are security updates.
+
+ubuntu@0bar.instance.com: ~
+→ ls
+tmp  foo
+
+→ exit
+logout
+Connection to ec2-xx-xx-xx-xxx.eu-west-1.compute.amazonaws.com closed.
+
+[ec2ssh] - SSH connection closed!
+```
+
+
+#### Help
+
 
 ```
+$ ec2ssh -h
+
  Usage: ec2ssh [options] <nameFilter1, nameFilter2, ...>
 
   Options:
