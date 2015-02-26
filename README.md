@@ -118,6 +118,7 @@ Connection to ec2-xx-xx-xx-xxx.eu-west-1.compute.amazonaws.com closed.
 #### Connect to an instance (exact name match)
 ```
 $ ec2ssh bar-instance
+[ec2ssh] - Connectin to bar-instance ...
 
 Welcome to Ubuntu 12.04.5 LTS (GNU/Linux 3.2.0-76-virtual x86_64)
 
