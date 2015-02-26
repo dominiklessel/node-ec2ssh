@@ -1,6 +1,6 @@
 {
   "name": "ec2ssh",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "SSH into EC2 instances via tags",
   "main": "index.js",
   "dependencies": {
