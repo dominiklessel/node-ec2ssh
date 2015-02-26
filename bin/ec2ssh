@@ -30,7 +30,7 @@ program
 var nameFilters = program.args;
 
 var sshOptions = {
-  user: 'ubuntu',
+  user: typeof program.user === 'string' ? program.user : 'ubuntu',
   identityFilesPath:  path.join( process.env.HOME, '.ssh/keys' )
 };
 
