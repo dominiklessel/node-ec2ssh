@@ -104,7 +104,7 @@ Welcome to Ubuntu 12.04.5 LTS (GNU/Linux 3.2.0-76-virtual x86_64)
 0 packages can be updated.
 0 updates are security updates.
 
-ubuntu@0bar.instance.com: ~
+ubuntu@bar.instance.com: ~
 → ls
 tmp  foo
 
@@ -132,7 +132,7 @@ Welcome to Ubuntu 12.04.5 LTS (GNU/Linux 3.2.0-76-virtual x86_64)
 0 packages can be updated.
 0 updates are security updates.
 
-ubuntu@0bar.instance.com: ~
+ubuntu@bar.instance.com: ~
 → ls
 tmp  foo
 
