@@ -17,7 +17,8 @@
   "keywords": [
     "ssh",
     "ec2",
-    "tags"
+    "tags",
+    "aws"
   ],
   "author": "Dominik Lessel <dominik@mifitto.com>",
   "license": "MIT",
